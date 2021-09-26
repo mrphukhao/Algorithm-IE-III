@@ -11,7 +11,7 @@ void BouncingBalls_Blue(byte red, byte green, byte blue, int BallCount);
 void Red_ForBack_Ward(int i);
 void Green_ForBack_Ward(int i);
 void Blue_ForBack_Ward(int i);
-void RainBow(int i);
+void theaterChaseRainbow(int SpeedDelay);
 void fadeRGB(int i);
 void Twinkle(int i);
 void brightenRed();
@@ -25,7 +25,8 @@ int stateRun=0;
 
 
 void setup() {
-  Serial.begin(9600);
+      Serial.begin(9600);
+      pixels.begin();
 }
 
 void loop() 
@@ -100,7 +101,7 @@ void loop()
                 case 0:
                 {
                     // Serial.println("Range 3.1");
-                    RainBow(1);
+                  theaterChaseRainbow(50);
                 }
                 break;
                 case 1:
@@ -392,53 +393,46 @@ void Blue_ForBack_Ward(int i)
 }
 
 //Mode 3
-void RainBow(int i)
-{
+void theaterChaseRainbow(int SpeedDelay) {
+  byte *c;
+ 
+  for (int j=0; j < 256; j++) {     // cycle all 256 colors in the wheel
+    for (int q=0; q < 3; q++) {
+        for (int i=0; i < NUMPIXELS; i=i+3) {
+          c = Wheel( (i+j) % 255);
+          pixels.setPixelColor(i+q, *c, *(c+1), *(c+2));    //turn every third pixel on
+        }
+        pixels.show();
+       
+        delay(SpeedDelay);
+       
+        for (int i=0; i < NUMPIXELS; i=i+3) {
+          pixels.setPixelColor(i+q, 0,0,0);        //turn every third pixel off
+        }
+    }
+  }
+}
 
-    for(int i=0; i<NUMPIXELS; i++) 
-        {
-            int stateled = random(2);
-            if (stateled==0)
-            {
-                Red_Value = random(0);
-                Blue_Value = random(0);
-                Green_Value = random(255);
-                pixels.setPixelColor((i+1), pixels.Color(25, 0, 25)); // violet
-                pixels.setPixelColor((i+3), pixels.Color(255, 0, 255)); // indigo
-                pixels.setPixelColor((i+4), pixels.Color(0, 0, 150)); // blue
-                pixels.setPixelColor((i+5), pixels.Color(0, 150, 0)); // green 
-                pixels.setPixelColor((i+6), pixels.Color(255, 255, 0)); // yellow
-                pixels.setPixelColor((i+7), pixels.Color(110, 70, 0)); // orange
-                pixels.setPixelColor((i+8), pixels.Color(150, 0, 0)); // red
-                pixels.show();    
-                Serial.println("RainBow Forward");
-            }
-            else
-                Serial.println("Default Rainbow Forward");
-        }
-        pixels.clear();
-    for (int i=NUMPIXELS; i > 0; i--)
-        {
-            int stateled = random(2);
-            if (stateled==0)
-            {
-                Red_Value = random(0);
-                Blue_Value = random(0);
-                Green_Value = random(255);
-                pixels.setPixelColor((i+1), pixels.Color(25, 0, 25)); // violet
-                pixels.setPixelColor((i+3), pixels.Color(255, 0, 255)); // indigo
-                pixels.setPixelColor((i+4), pixels.Color(0, 0, 150)); // blue
-                pixels.setPixelColor((i+5), pixels.Color(0, 150, 0)); // green 
-                pixels.setPixelColor((i+6), pixels.Color(255, 255, 0)); // yellow
-                pixels.setPixelColor((i+7), pixels.Color(110, 70, 0)); // orange
-                pixels.setPixelColor((i+8), pixels.Color(150, 0, 0)); // red
-                pixels.show();    
-                Serial.println("RainBow Backward");
-            }
-            else
-                Serial.println("Default Rainbow Backward");
-        }
-        pixels.clear();
+byte * Wheel(byte WheelPos) {
+  static byte c[3];
+ 
+  if(WheelPos < 85) {
+   c[0]=WheelPos * 3;
+   c[1]=255 - WheelPos * 3;
+   c[2]=0;
+  } else if(WheelPos < 170) {
+   WheelPos -= 85;
+   c[0]=255 - WheelPos * 3;
+   c[1]=0;
+   c[2]=WheelPos * 3;
+  } else {
+   WheelPos -= 170;
+   c[0]=0;
+   c[1]=WheelPos * 3;
+   c[2]=255 - WheelPos * 3;
+  }
+
+  return c;
 }
 
 void fadeRGB(int i)
