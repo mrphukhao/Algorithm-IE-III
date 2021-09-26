@@ -1,17 +1,17 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 2	
-#define NUMPIXELS 48 
+#define NUMPIXELS 21 
 // int Pin1 = A1, Pin2 = A2;
 int Red_Value = 0, Blue_Value = 0, Green_Value = 0, delayval = 0;
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-void redBasic(int i);
-void greenBasic(int i);
-void blueBasic(int i);
-void Red_ForBack_Ward(int i);
-void Green_ForBack_Ward(int i);
-void Blue_ForBack_Ward(int i);
-void RainBow(int i);
-void FadeInOut(int i);
+void testRange01(int i);
+void testRange02(int i);
+void testRange03(int i);
+void testRange04(int i);
+void testRange05(int i);
+void testRange06(int i);
+void testRange07(int i);
+void testRange08(int i);
 void testRange09(int i);
 
 
@@ -26,35 +26,34 @@ void loop()
     int sensorPin2 = analogRead(A2);
     
     // map the sensor range to a range of four options:
-    int mode = map(sensorPin1, 0, 1023, 0, 2);
-    int range = map(sensorPin2, 0, 1023, 0, 2);
+    int mode = map(sensorPin1, 0, 1023, 0, 3);
+    int range = map(sensorPin2, 0, 1023, 0, 3);
     switch(mode)
     {
         case 0:
-        {   
+        {
             Serial.println("Mode 1"); 
             switch(range)
             {
                 case 0:
                 {
-                    // Serial.println("Range 1.1");
-                    redBasic(1);
+                    Serial.println("Range 1.1");
+                    testRange01(1);
                 }
                 break;
                 case 1:
                 {
-                    // Serial.println("Range 1.2");
-                    greenBasic(1);
+                    Serial.println("Range 1.2");
+                    testRange02(1);
                 }
                 break;
                 case 2:
                 {
-                    // Serial.println("Range 1.3");
-                    blueBasic(1);
+                    Serial.println("Range 1.3");
+                    testRange03(1);
                 }
                 break;
             }
-            
         }
         break;
         case 1:
@@ -64,20 +63,21 @@ void loop()
             {
                 case 0:
                 {
-                    // Serial.println("Range 2.1");                  
-                    Red_ForBack_Ward(1);
+                    Serial.println("Range 2.1");
+                    
+                    testRange04(1);
                 }
                 break;
                 case 1:
                 {
-                    // Serial.println("Range 2.2");
-                    Green_ForBack_Ward(1);
+                    Serial.println("Range 2.2");
+                    testRange05(1);
                 }
                 break;
                 case 2:
                 {
-                    // Serial.println("Range 2.3");
-                    Blue_ForBack_Ward(1);
+                    Serial.println("Range 2.3");
+                    testRange06(1);
                 }
                 break;
             }
@@ -90,19 +90,19 @@ void loop()
             {
                 case 0:
                 {
-                    // Serial.println("Range 3.1");
-                    RainBow(1);
+                    Serial.println("Range 3.1");
+                    testRange07(1);
                 }
                 break;
                 case 1:
                 {
-                    // Serial.println("Range 3.2");
-                    FadeInOut(1);
+                    Serial.println("Range 3.2");
+                    testRange08(1);
                 }
                 break;
                 case 2:
                 {
-                    // Serial.println("Range 3.3");
+                    Serial.println("Range 3.3");
                     testRange09(1);
                 }
                 break;
@@ -117,256 +117,49 @@ void loop()
 
 
 
-void redBasic(int i) 
+void testRange01(int i)
 {
-    // Serial.println("testInRange 1.1");
-    for(int i=0; i<NUMPIXELS; i++)
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(255);
-            Blue_Value = random(0);
-            Green_Value = random(0);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();    
-            Serial.println("Red Basic");
-        }
-        else
-            Serial.println("Default Red Basic");
-    }
+    Serial.println("testInRange 1.1");
+    Serial.println(i);
 
 }
 
-void greenBasic(int i)
+void testRange02(int i)
 {
-    // Serial.println("testInRange 1.2");
-    for(int i=0; i<NUMPIXELS; i++)
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(0);
-            Blue_Value = random(0);
-            Green_Value = random(255);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();    
-            Serial.println("Green Basic");
-        }
-        else
-            Serial.println("Default Green Basic");
-    }
+    Serial.println("testInRange 1.2");
 }
 
-void blueBasic(int i)
+void testRange03(int i)
 {
-    // Serial.println("testInRange 1.3");
-    for(int i=0; i<NUMPIXELS; i++)
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(0);
-            Blue_Value = random(255);
-            Green_Value = random(0);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();    
-            Serial.println("Blue Basic");
-        }
-        else
-            Serial.println("Default Blue Basic");
-    }
+    Serial.println("testInRange 1.3");
 }
 
-void Red_ForBack_Ward(int i)
+void testRange04(int i)
 {
-
-    for(int i=0; i<NUMPIXELS; i++) 
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(255);
-            Green_Value = random(0);
-            Blue_Value = random(0);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();
-            Serial.println("Red Forward");
-        }
-        else
-            Serial.println("Default Red Forward");
-            // Serial.println("Default Red");
-    }
-    pixels.clear();
-    for (int i=NUMPIXELS; i > 0; i--)
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(255);
-            Green_Value = random(0);
-            Blue_Value = random(0);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();
-            Serial.println("Red BackWard");
-        }
-        else
-            Serial.println("Default Red BackWard");
-    }
-    pixels.clear();
+    Serial.println("testInRange 2.1");
 }
 
-void Green_ForBack_Ward(int i)
+void testRange05(int i)
 {
-    for(int i=0; i<NUMPIXELS; i++) 
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(0);
-            Green_Value = random(255);
-            Blue_Value = random(0);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();
-            Serial.println("Green ForWard");
-        }
-        else
-            Serial.println("Default Green Forward");
-            // Serial.println("Default Red");
-    }
-    pixels.clear();
-    for (int i=NUMPIXELS; i > 0; i--)
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(0);
-            Green_Value = random(255);
-            Blue_Value = random(0);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();
-            Serial.println("Green BackWard");
-        }
-        else
-            Serial.println("Default Green BackWard");
-    }
-    pixels.clear();
+    Serial.println("testInRange 2.2");
 }
 
-void Blue_ForBack_Ward(int i)
+void testRange06(int i)
 {
-    for(int i=0; i<NUMPIXELS; i++) 
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(0);
-            Green_Value = random(0);
-            Blue_Value = random(255);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();
-            Serial.println("Blue ForWard");
-        }
-        else
-            Serial.println("Default Blue Forward");
-            // Serial.println("Default Red");
-    }
-    pixels.clear();
-    for (int i=NUMPIXELS; i > 0; i--)
-    {
-        int stateled = random(2);
-        if (stateled==0)
-        {
-            Red_Value = random(0);
-            Green_Value = random(0);
-            Blue_Value = random(255);
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-            pixels.show();
-            Serial.println("Blue BackWard");
-        }
-        else
-            Serial.println("Default Blue BackWard");
-    }
-    pixels.clear();
+    Serial.println("testInRange 2.3");
 }
 
-void RainBow(int i)
+void testRange07(int i)
 {
-
-    for(int i=0; i<NUMPIXELS; i++) 
-        {
-            int stateled = random(2);
-            if (stateled==0)
-            {
-                Red_Value = random(0);
-                Blue_Value = random(0);
-                Green_Value = random(255);
-                pixels.setPixelColor((i+1), pixels.Color(25, 0, 25)); // violet
-                pixels.setPixelColor((i+3), pixels.Color(255, 0, 255)); // indigo
-                pixels.setPixelColor((i+4), pixels.Color(0, 0, 150)); // blue
-                pixels.setPixelColor((i+5), pixels.Color(0, 150, 0)); // green 
-                pixels.setPixelColor((i+6), pixels.Color(255, 255, 0)); // yellow
-                pixels.setPixelColor((i+7), pixels.Color(110, 70, 0)); // orange
-                pixels.setPixelColor((i+8), pixels.Color(150, 0, 0)); // red
-                pixels.show();    
-                Serial.println("RainBow Forward");
-            }
-            else
-                Serial.println("Default Rainbow Forward");
-        }
-        pixels.clear();
-    for (int i=NUMPIXELS; i > 0; i--)
-        {
-            int stateled = random(2);
-            if (stateled==0)
-            {
-                Red_Value = random(0);
-                Blue_Value = random(0);
-                Green_Value = random(255);
-                pixels.setPixelColor((i+1), pixels.Color(25, 0, 25)); // violet
-                pixels.setPixelColor((i+3), pixels.Color(255, 0, 255)); // indigo
-                pixels.setPixelColor((i+4), pixels.Color(0, 0, 150)); // blue
-                pixels.setPixelColor((i+5), pixels.Color(0, 150, 0)); // green 
-                pixels.setPixelColor((i+6), pixels.Color(255, 255, 0)); // yellow
-                pixels.setPixelColor((i+7), pixels.Color(110, 70, 0)); // orange
-                pixels.setPixelColor((i+8), pixels.Color(150, 0, 0)); // red
-                pixels.show();    
-                Serial.println("RainBow Backward");
-            }
-            else
-                Serial.println("Default Rainbow Backward");
-        }
-        pixels.clear();
+    Serial.println("testInRange 3.1");
 }
 
-void FadeInOut(int i)
+void testRange08(int i)
 {
-  int i, j;
-  for (j = 45; j < 255; j++) 
-  {
-       for (i = 0; i < pixels.setPixelColor(); i++) 
-        {
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-        }
-        strip.show();
-        delay(10);
-  }
-  int i, j;
-  for (j = 255; j > 45; j--) 
-  {
-    for (j = 255; j > 45; j--) 
-    {
-        for (i = 0; i < pixels.setPixelColor(); i++) 
-        {
-            pixels.setPixelColor(i, pixels.Color(Red_Value, Green_Value, Blue_Value));
-        }
-        strip.show();
-        delay(10);
-    }
-  }
+    Serial.println("testInRange 3.2");
 }
 
 void testRange09(int i)
 {
-    Serial.println("testInRange 4.3");
+    Serial.println("testInRange 3.3");
 }
