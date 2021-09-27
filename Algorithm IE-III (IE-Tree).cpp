@@ -36,8 +36,8 @@ void loop()
     int sensorPin2 = analogRead(A2);
     
     // map the sensor 
-    int mode = map(sensorPin1, 0, 1023, 0, 2);
-    int range = map(sensorPin2, 0, 1023, 0, 2);
+    int mode = map(sensorPin1, 0, 1023, 0, 3);
+    int range = map(sensorPin2, 0, 1023, 0, 3);
     switch(mode)
     {
         case 0:
@@ -147,8 +147,8 @@ void BouncingBalls_Red(byte red, byte green, byte blue, int BallCount)
     TimeSinceLastBounce[i] = 0;
     Dampening[i] = 0.90 - float(i)/pow(BallCount,2);
   }
-
-  while (true) 
+  int count = 0;
+  while (count<400) 
   {
     for (int i = 0 ; i < BallCount ; i++) 
     {
@@ -177,6 +177,7 @@ void BouncingBalls_Red(byte red, byte green, byte blue, int BallCount)
     pixels.show();
     Serial.println("BouncingBalls Red");
     pixels.clear();
+    count = count + 1;
   }
 }
 
@@ -202,17 +203,22 @@ void BouncingBalls_Green(byte red, byte green, byte blue, int BallCount)
     Dampening[i] = 0.90 - float(i)/pow(BallCount,2);
   }
 
-  while (true) {
-    for (int i = 0 ; i < BallCount ; i++) {
+ int count = 0;
+  while (count<400) 
+  {
+    for (int i = 0 ; i < BallCount ; i++) 
+    {
       TimeSinceLastBounce[i] =  millis() - ClockTimeSinceLastBounce[i];
       Height[i] = 0.5 * Gravity * pow( TimeSinceLastBounce[i]/1000 , 2.0 ) + ImpactVelocity[i] * TimeSinceLastBounce[i]/1000;
  
-      if ( Height[i] < 0 ) {                      
+      if ( Height[i] < 0 ) 
+      {                      
         Height[i] = 0;
         ImpactVelocity[i] = Dampening[i] * ImpactVelocity[i];
         ClockTimeSinceLastBounce[i] = millis();
  
-        if ( ImpactVelocity[i] < 0.01 ) {
+        if ( ImpactVelocity[i] < 0.01 ) 
+        {
           ImpactVelocity[i] = ImpactVelocityStart;
         }
       }
@@ -227,6 +233,7 @@ void BouncingBalls_Green(byte red, byte green, byte blue, int BallCount)
     pixels.show();
     Serial.println("BouncingBalls Green");
     pixels.clear();
+    count = count + 1;
   }
 }
 void BouncingBalls_Blue(byte red, byte green, byte blue, int BallCount) 
@@ -251,17 +258,22 @@ void BouncingBalls_Blue(byte red, byte green, byte blue, int BallCount)
     Dampening[i] = 0.90 - float(i)/pow(BallCount,2);
   }
 
-  while (true) {
-    for (int i = 0 ; i < BallCount ; i++) {
+ int count = 0;
+  while (count<400) 
+  {
+    for (int i = 0 ; i < BallCount ; i++) 
+    {
       TimeSinceLastBounce[i] =  millis() - ClockTimeSinceLastBounce[i];
       Height[i] = 0.5 * Gravity * pow( TimeSinceLastBounce[i]/1000 , 2.0 ) + ImpactVelocity[i] * TimeSinceLastBounce[i]/1000;
  
-      if ( Height[i] < 0 ) {                      
+      if ( Height[i] < 0 ) 
+      {                      
         Height[i] = 0;
         ImpactVelocity[i] = Dampening[i] * ImpactVelocity[i];
         ClockTimeSinceLastBounce[i] = millis();
  
-        if ( ImpactVelocity[i] < 0.01 ) {
+        if ( ImpactVelocity[i] < 0.01 ) 
+        {
           ImpactVelocity[i] = ImpactVelocityStart;
         }
       }
@@ -276,6 +288,7 @@ void BouncingBalls_Blue(byte red, byte green, byte blue, int BallCount)
     pixels.show();
     Serial.println("BouncingBalls Blue");
     pixels.clear();
+    count = count + 1;
   }
 }
 
