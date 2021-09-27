@@ -21,4 +21,4 @@ Ouput Pin : Digital 2
 
 
 Development by. Mr.Phukhao 
-[New Text Document.txt](https://github.com/mrphukhao/Algorithm-IE-III/files/7233100/New.Text.Document.txt)
+
