@@ -20,4 +20,4 @@ Input Pin : Analog A1, A2
 Ouput Pin : Digital 2
 
 
-Development by. Mr.Phukhao
+Development by. Mr.Phukhao 
